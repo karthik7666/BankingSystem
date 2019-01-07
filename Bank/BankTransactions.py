@@ -1,4 +1,4 @@
-from SimpleBankProject.Utility.DatabaseConnection import DBConnection
+from BankingSystem.BankingSystem.Utility.DatabaseConnection import DBConnection
 import datetime
 from time import gmtime, strftime
 class Transactions:
@@ -6,11 +6,11 @@ class Transactions:
     def __init__(self):
         self.db = DBConnection()
 
-    def insertNewUser(self,Name,CustRole,DOB,DateOfAccCreation,Addrss,Phno,adharcard,pancard,Accounttype,branchname):
+    def insertNewUser(self,Name,CustRole,DOB,DateOfAccCreation,Addrss,Phno,adharcard,pancard,Accounttype,branchname,Password):
         query = "INSERT INTO [dbo].[Customers] ([CustomerName],[CustomerRole],[DateofBirth],[DateofAccCreation],[Address],[PhoneNumber],[AadharNumber]," \
-                "[Pancard],[Accounttype],[BranchName]) values (?,?,?,?,?,?,?,?,?,?)"
+                "[Pancard],[Accounttype],[BranchName],[Password]) values (?,?,?,?,?,?,?,?,?,?,?)"
 
-        val = (Name,CustRole,DOB,DateOfAccCreation,Addrss,Phno,adharcard,pancard,Accounttype,branchname)
+        val = (Name,CustRole,DOB,DateOfAccCreation,Addrss,Phno,adharcard,pancard,Accounttype,branchname,Password)
         self.db.connect(query,val)
 
     def Deposit(self,CustomerID):
@@ -46,3 +46,7 @@ class Transactions:
         updatequery = ("update Accounts set Balance = ? where customerID = ?")
         updateval = (Balanace, CustomerID)
         self.db.connect(updatequery,updateval)
+
+    def GetPassword(self,CustomerID):
+        query = ("select Password from customers where customerID = ?")
+        return self.db.FetchResult(query,CustomerID)
