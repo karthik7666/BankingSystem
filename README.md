@@ -2,13 +2,18 @@
 
 This project is simple banking system using Python and Sql server. 
 
-i have used PYODBC library for Database connectivity.
+User Roles:
 
-Project includes basic bank transactions like,
+1) Administrator (Regional Manager or Branch manager)
+2) User
 
-1) New user creation
+Login to the system:
 
-2) For exiting user :
+Every user can login using customerID and Password. Password will be hashed and saved in Database. Every time password will be validated before logging in.
+
+Administrator can create New users and Update bank details
+
+Existing Users can login and perform all transactions
 
   a) Deposit
   b) Withdraw
@@ -17,6 +22,7 @@ Project includes basic bank transactions like,
 
 All basic transactions and balances will be captured in SQL table
 
+i have used PYODBC library for Database connectivity.
 
 
 
